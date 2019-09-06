@@ -45,6 +45,7 @@ vector<Point> convex_hull(vector<Point> A){
 }
 
 int main(){
+	
 	int n, x, y, sz;
 	vector<Point> points;
 	
