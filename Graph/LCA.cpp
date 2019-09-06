@@ -11,7 +11,6 @@ int depth[MAXN];
 int parent[MAXN][level];
 
 void dfs(int now, int par){
-	
 	depth[now] = depth[par] + 1;
 	parent[now][0] = par;
 	int sz = adjlist[now].size();
@@ -23,7 +22,6 @@ void dfs(int now, int par){
 }
 
 void precompute(int n){
-	
 	for(int i = 1; i < level; i++){
 		for(int j = 1; j <= n; j++){
 			if(parent[j][i-1] != -1){
@@ -34,7 +32,6 @@ void precompute(int n){
 }
 
 int lca(int u, int v){
-	
 	if(depth[v] < depth[u]){
 		swap(u, v);
 	}
