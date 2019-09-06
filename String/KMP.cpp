@@ -6,6 +6,7 @@ string a,b;
 
 int main()
 {
+	
 	cin>>a>>b;
 	int len=0;
 	i=1;
