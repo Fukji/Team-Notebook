@@ -71,8 +71,3 @@ point rotate(point a, long double theta){
 	ans.y = y;
 	return ans;
 }
-
-int main(){
-
-	return 0;
-}
