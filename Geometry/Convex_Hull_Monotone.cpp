@@ -4,14 +4,16 @@
 using namespace std;
 
 struct Point{
-	long long x, y;
+	long double x, y;
 	
 	bool operator<(Point p){
 		return x < p.x || (x == p.x && y < p.y);
 	}
 };
 
-long long cross_product(Point o, Point a, Point b){
+const long double EPS = 0.0000001;
+
+long double cross_product(Point o, Point a, Point b){
 	return (a.x - o.x) * (b.y - o.y) - (a.y - o.y) * (b.x - o.x);
 }
 
@@ -27,14 +29,14 @@ vector<Point> convex_hull(vector<Point> A){
 	sort(A.begin(), A.end());
 	
 	for(int i = 0; i < n; i++){
-		while(k >= 2 && cross_product(ans[k-2], ans[k-1], A[i]) <= 0){
+		while(k >= 2 && cross_product(ans[k-2], ans[k-1], A[i]) <= EPS){
 			k--;
 		}
 		ans[k++] = A[i];
 	}
 	
 	for(int i = n-1, t = k+1; i > 0; i--){
-		while(k >= t && cross_product(ans[k-2], ans[k-1], A[i-1]) <= 0){
+		while(k >= t && cross_product(ans[k-2], ans[k-1], A[i-1]) <= EPS){
 			k--;
 		}
 		ans[k++] = A[i-1];
@@ -46,7 +48,8 @@ vector<Point> convex_hull(vector<Point> A){
 
 int main(){
 	
-	int n, x, y, sz;
+	int n, sz;
+	long double x, y;
 	vector<Point> points;
 	
 	cin >> n;
