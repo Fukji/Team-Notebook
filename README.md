@@ -1,2 +1,2 @@
-# Fukji's Team Notebook
-Team notebook for everyone who wants to copy
+# 3NewFreshMen Team Notebook
+Team notebook for 3NewFreshMen team
