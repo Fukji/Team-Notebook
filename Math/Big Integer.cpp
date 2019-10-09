@@ -1,7 +1,4 @@
-#include <algorithm>
-#include <iostream>
-#include <vector>
-using namespace std;
+//Big integer operation using string
 
 string divide(string number, long long divisor){
 	string ans;
@@ -153,14 +150,9 @@ string diff(string num1, string num2){
 	return ans;
 }
 
-int main(){
-	
-	string num1 = "1248163264128256512";
-	string num2 = "1714546546546545454544548544544545";
-	long long divisor = 125;
-	cout << divide(num1, divisor) << endl;
-	cout << multiply(num1, num2) << endl;
-	cout << sum(num1, num2) << endl;
-	cout << diff(num1, num2) << endl;
-	return 0;
+void solve(string num1, string num2, int divisor){
+	string div = divide(num1, divisor);
+	string mult = multiply(num1, num2);
+	string add = sum(num1, num2);
+	string difference = diff(num1, num2);
 }
