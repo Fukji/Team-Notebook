@@ -1,3 +1,5 @@
+//Tarjan algorithm for finding articulation points and bridges in a graph
+
 const int GraphSize = 1000;
 int root, child, counter;
 int num[GraphSize], low[GraphSize], parent[GraphSize];
