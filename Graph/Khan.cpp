@@ -59,6 +59,7 @@ long long findways(int v, int start){
 }
 
 void solve(int v, int dest, int start){
+	sorted.clear();
 	toposort(v);
 	//sorted will contain the sorted vertices of the graph
 
