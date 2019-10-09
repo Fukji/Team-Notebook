@@ -1,3 +1,5 @@
+//Finding topological sorting, counting number of ways and finding the longest or shortest path on DAG
+
 const int GraphSize = 1000;
 vector<int> sorted;
 vector<pair<int, int>> adjlist[GraphSize];
