@@ -1,4 +1,4 @@
-//Tarjan algorithm for finding articulation points and bridges in a graph
+//Finding articulation points and bridges in a general graph
 
 const int GraphSize = 1000;
 int root, child, counter;
