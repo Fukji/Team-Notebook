@@ -1,3 +1,5 @@
+//Efficient query operation
+
 const int MSIZE = 100010;
 int blocksz;
 int arr[MSIZE], result[MSIZE];
