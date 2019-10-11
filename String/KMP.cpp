@@ -1,58 +1,44 @@
-#include <iostream>
-using namespace std;
+//Finding the starting index of a substring in a longer string
 
-int i,j,lps[100005];
-string a,b;
+const int MaxLen = 1000000;
+int backtable[MaxLen];
 
-int main(){
-	
-	cin>>a>>b;
-	int len = 0;
-	i = 1;
-	lps[0] = 0;
-	int lena = a.length();
-	int lenb = b.length();
-	
-	while(i < lenb){
-		if(b[i] == b[len]){
-			len++;
-			lps[i] = len;
-			i++;
+void preprocess(string pattern){
+	int patlen = pattern.length();
+	int i = 0;
+	int j = -1;
+	backtable[0] = -1;
+	while(i < patlen){
+		while(j >= 0 && pattern[i] != pattern[j]){
+			j = backtable[j];
 		}
-		else{
-			if(len != 0){
-				len = lps[len-1];
-			}
-			else{
-				lps[i] = 0;
-				i++;
-			}
-		}
+		i++;
+		j++;
+		backtable[i] = j;
 	}
-	
-	i = j = 0;
-	
-	while(i < lena){
-		if(a[i] == b[j]){
-			i++;
-			j++;
-		}
-		if(j == lenb){
-			cout<<"possible"<<endl;
-			return 0;
-		}
-		else if(i < lena && b[j] != a[i]){
-			if(j != 0){
-				j = lps[j-1];
-			}
-			else{
-				i++;
-			}
-		}
-	}
-	cout<<"impossible"<<endl;
-	return 0;
 }
 
+vector<int> search(string text, string pattern){
+	int len = text.length();
+	int patlen = pattern.length();
+	int i, j;
+	i = j = 0;
+	vector<int> idx;
+	while(i < len){
+		while(j >= 0 && text[i] != pattern[j]){
+			j = backtable[j];
+		}
+		i++;
+		j++;
+		if(j == patlen){
+			idx.push_back(i-j);
+			j = backtable[j];
+		}
+	}
+	return idx;
+}
 
-
+void solve(string text, string pattern){
+	preprocess(pattern);
+	vector<int> idx = search(text, pattern);
+}
