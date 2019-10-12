@@ -1,4 +1,4 @@
-//
+//Functions related to 2D geometry objects like circles, triangles and polygons
 //Requires: 1D.cpp
 
 const double EPS = 0.0000001;
