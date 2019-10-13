@@ -23,7 +23,7 @@ void precompute(int v, int start){
 	dfs(start);
 	for(int i = 1; i < MaxLevel; i++){
 		for(int j = 1; j <= v; j++){
-			if(parent[j][i] != -1){
+			if(parent[j][i-1] != -1){
 				parent[j][i] = parent[parent[j][i-1]][i-1];
 			}
 		}
