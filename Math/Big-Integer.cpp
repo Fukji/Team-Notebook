@@ -108,47 +108,70 @@ string sum(string num1, string num2){
 	return ans;
 }
 
-string diff(string num1, string num2){
-	if(num1 < num2)
-		swap(num1, num2);
-		
-	string ans = "";
+bool isSmaller(string str1, string str2) 
+{ 
+    if(str1 == str2)
+	return true;
+    int n1 = str1.length(), n2 = str2.length(); 
+  
+    if (n1 < n2) 
+    	return true; 
+    if (n2 < n1) 
+    	return false; 
+  
+    for (int i=0; i<n1; i++){
+	if (str1[i] < str2[i]) 
+        	return true; 
+    	else if (str1[i] > str2[i]) 
+       		return false;    
+    }
 	
-	int len1 = num1.length();
-	int len2 = num2.length();
-	int diff = len1-len2;
-	
-	int sub, carry = 0;
-	for(int i = len2-1; i >= 0; i--){
-		sub = (num1[i+diff]-'0') - (num2[i]-'0') - carry;
-		
-		if(sub < 0){
-			sub += 10;
-			carry = 1;
-		}
-		else{
-			carry = 0;
-		}
-		
-		ans += to_string(sub);
-	}
-	
-	for(int i = len1-len2-1; i >= 0; i--){
-		if(num1[i] == '0' && carry){
-			ans += '9';
-			continue;
-		}
-		
-		sub = (num1[0] - '0') - carry;
-		if(i > 0 || sub > 0){
-			ans += to_string(sub);
-		}
-		carry = 0;
-	}
-	
-	reverse(ans.begin(), ans.end());
-	return ans;
-}
+    return false; 
+} 
+
+string diff(string str1, string str2) 
+{ 
+    string str = ""; 
+    int n1 = str1.length(), n2 = str2.length(); 
+  
+    reverse(str1.begin(), str1.end()); 
+    reverse(str2.begin(), str2.end()); 
+      
+    int carry = 0; 
+  
+    for (int i=0; i<n2; i++) 
+    { 
+        int sub = ((str1[i]-'0')-(str2[i]-'0')-carry); 
+        if (sub < 0) 
+        { 
+            sub = sub + 10; 
+            carry = 1; 
+        } 
+        else
+            carry = 0; 
+  
+        str.push_back(sub + '0'); 
+    } 
+  
+    for (int i=n2; i<n1; i++) 
+    { 
+        int sub = ((str1[i]-'0') - carry); 
+          
+        if (sub < 0) 
+        { 
+            sub = sub + 10; 
+            carry = 1; 
+        } 
+        else
+            carry = 0; 
+              
+        str.push_back(sub + '0'); 
+    } 
+  
+    reverse(str.begin(), str.end()); 
+  
+    return str; 
+} 
 
 void solve(string num1, string num2, int divisor){
 	string div = divide(num1, divisor);
