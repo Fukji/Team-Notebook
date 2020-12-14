@@ -90,9 +90,7 @@ bool SegmentsIntersect(PT a, PT b, PT c, PT d) {
 }
 
 // compute intersection of line passing through a and b
-// with line passing through c and d, assuming that unique
-// intersection exists; for segment intersection, check if
-// segments intersect first
+// with line passing through c and d
 PT ComputeLineIntersection(PT a, PT b, PT c, PT d) {
   b=b-a; d=c-d; c=c-a;
   assert(dot(b, b) > EPS && dot(d, d) > EPS);
@@ -106,13 +104,9 @@ PT ComputeCircleCenter(PT a, PT b, PT c) {
   return ComputeLineIntersection(b, b+RotateCW90(a-b), c, c+RotateCW90(a-c));
 }
 
-// determine if point is in a possibly non-convex polygon (by William
-// Randolph Franklin); returns 1 for strictly interior points, 0 for
+// determine if point is in a possibly non-convex polygon;
+// returns 1 for strictly interior points, 0 for
 // strictly exterior points, and 0 or 1 for the remaining points.
-// Note that it is possible to convert this into an *exact* test using
-// integer arithmetic by taking care of the division appropriately
-// (making sure to deal with signs properly) and then by writing exact
-// tests for checking point on polygon boundary
 bool PointInPolygon(const vector<PT> &p, PT q) {
   bool c = 0;
   for (int i = 0; i < p.size(); i++){
@@ -135,49 +129,49 @@ bool PointOnPolygon(const vector<PT> &p, PT q) {
 
 // Polygon Diameter
 Polygon struct Point {
-double x, y;
-Point(double xx, double yy) {
-x = xx; y = yy;}
-Point() {}
-void print() {
-cout &lt;&lt; &quot;(&quot; &lt;&lt; x &lt;&lt; &quot;,&quot; &lt;&lt; y &lt;&lt; &quot;)&quot;;}};
-double area(Point &amp;p1, Point &amp;p2, Point &amp;p3) {
-return 0.5 * fabs((p1.x - p2.x) * (p1.y - p3.y) - (p1.x - p3.x) * (p1.y -
-p2.y));}
-double len(double dx, double dy) {
-return sqrt(dx * dx + dy * dy);}
-double distance2Point(Point &amp;p1, Point &amp;p2) {
-return len(p1.x - p2.x, p1.y - p2.y);}
-struct ConvexPolygon {
-Point *p;
-int n;
-ConvexPolygon(Point *pp, int nn) {
-p = pp; n = nn;}
-double diameter() {
-int a, b; double d=0; double area1, area2;
-if(n == 2) return distance2Point(p[0], p[1]);
-if(n == 3) return max(distance2Point(p[0], p[1]),
-max(distance2Point(p[1], p[2]), distance2Point(p[0], p[2])));
-a = n - 1; b = 1;
-area1 = area(p[a], p[(a + 1) % n], p[(b + 1) % n]);
-area2 = area(p[a], p[(a + 1) % n], p[b]);
-while(area1 &gt; area2) {
-b = (b + 1) % n;
-area1 = area(p[a], p[(a + 1) % n], p[(b + 1) % n]);
-area2 = area(p[a], p[(a + 1) % n], p[b]);}
-while(b != 0) {
-a = (a + 1) % n;
-d = max(d, distance2Point(p[a], p[b]));
-area1 = area(p[a], p[(a + 1) % n], p[(b + 1) % n]);
-area2 = area(p[a], p[(a + 1) % n], p[b]);
-while(area1 &gt; area2) {
-b = (b + 1) % n;
-area1 = area(p[a], p[(a + 1) % n], p[(b + 1) % n]);
-area2 = area(p[a], p[(a + 1) % n], p[b]);
-if(b == 0) return d;
-d = max(d, distance2Point(p[a], p[b])); }}
-return d;
-}
+  double x, y;
+  Point(double xx, double yy) {
+    x = xx; y = yy;}
+  Point() {}
+  void print() {
+    cout &lt;&lt; &quot;(&quot; &lt;&lt; x &lt;&lt; &quot;,&quot; &lt;&lt; y &lt;&lt; &quot;)&quot;;}};
+  double area(Point &amp;p1, Point &amp;p2, Point &amp;p3) {
+    return 0.5 * fabs((p1.x - p2.x) * (p1.y - p3.y) - (p1.x - p3.x) * (p1.y -
+    p2.y));}
+  double len(double dx, double dy) {
+    return sqrt(dx * dx + dy * dy);}
+  double distance2Point(Point &amp;p1, Point &amp;p2) {
+    return len(p1.x - p2.x, p1.y - p2.y);}
+  struct ConvexPolygon {
+    Point *p;
+    int n;
+    ConvexPolygon(Point *pp, int nn) {
+      p = pp; n = nn;}
+    double diameter() {
+      int a, b; double d=0; double area1, area2;
+      if(n == 2) return distance2Point(p[0], p[1]);
+      if(n == 3) return max(distance2Point(p[0], p[1]),
+      max(distance2Point(p[1], p[2]), distance2Point(p[0], p[2])));
+      a = n - 1; b = 1;
+      area1 = area(p[a], p[(a + 1) % n], p[(b + 1) % n]);
+      area2 = area(p[a], p[(a + 1) % n], p[b]);
+      while(area1 &gt; area2) {
+        b = (b + 1) % n;
+        area1 = area(p[a], p[(a + 1) % n], p[(b + 1) % n]);
+        area2 = area(p[a], p[(a + 1) % n], p[b]);}
+      while(b != 0) {
+        a = (a + 1) % n;
+        d = max(d, distance2Point(p[a], p[b]));
+        area1 = area(p[a], p[(a + 1) % n], p[(b + 1) % n]);
+        area2 = area(p[a], p[(a + 1) %  n], p[b]);
+      while(area1 &gt; area2) {
+        b = (b + 1) % n;
+        area1 = area(p[a], p[(a + 1) % n], p[(b + 1) % n]);
+        area2 = area(p[a], p[(a + 1) % n], p[b]);
+      if(b == 0) return d;
+        d = max(d, distance2Point(p[a], p[b])); }}
+    return d;
+  }
 };
 
 // compute intersection of line through points a and b with
@@ -214,8 +208,7 @@ vector<PT> CircleCircleIntersection(PT a, PT b, double r, double R) {
 
 // This code computes the area or centroid of a (possibly nonconvex)
 // polygon, assuming that the coordinates are listed in a clockwise or
-// counterclockwise fashion.  Note that the centroid is often known as
-// the "center of gravity" or "center of mass".
+// counterclockwise.
 double ComputeSignedArea(const vector<PT> &p) {
   double area = 0;
   for(int i = 0; i < p.size(); i++) {
@@ -340,25 +333,17 @@ int main() {
   //           blank line
   //           (4,5) (5,4)
   vector<PT> u = CircleLineIntersection(PT(0,6), PT(2,6), PT(1,1), 5);
-  for (int i = 0; i < u.size(); i++) cerr << u[i] << " "; cerr << endl;
   u = CircleLineIntersection(PT(0,9), PT(9,0), PT(1,1), 5);
-  for (int i = 0; i < u.size(); i++) cerr << u[i] << " "; cerr << endl;
   u = CircleCircleIntersection(PT(1,1), PT(10,10), 5, 5);
-  for (int i = 0; i < u.size(); i++) cerr << u[i] << " "; cerr << endl;
   u = CircleCircleIntersection(PT(1,1), PT(8,8), 5, 5);
-  for (int i = 0; i < u.size(); i++) cerr << u[i] << " "; cerr << endl;
   u = CircleCircleIntersection(PT(1,1), PT(4.5,4.5), 10, sqrt(2.0)/2.0);
-  for (int i = 0; i < u.size(); i++) cerr << u[i] << " "; cerr << endl;
   u = CircleCircleIntersection(PT(1,1), PT(4.5,4.5), 5, sqrt(2.0)/2.0);
-  for (int i = 0; i < u.size(); i++) cerr << u[i] << " "; cerr << endl;
   
   // area should be 5.0
   // centroid should be (1.1666666, 1.166666)
   PT pa[] = { PT(0,0), PT(5,0), PT(1,1), PT(0,5) };
   vector<PT> p(pa, pa+4);
-  PT c = ComputeCentroid(p);
-  cerr << "Area: " << ComputeArea(p) << endl;
-  cerr << "Centroid: " << c << endl;
+  PT c = ComputeCentroid(p);  
   
   return 0;
 }
