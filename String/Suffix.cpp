@@ -11,7 +11,6 @@ int Compare(suffix a, suffix b)
 }
 
 suffix suf[100005];
-int start[100005];
 int indexOf[100005];
 
 vector<int> buildSuffixArray(string txt, int n)
