@@ -1,4 +1,4 @@
-// Complexity: O(V^2.E^2)
+// Complexity: O(V^2 E^2)
 const int INF = (int)1e9+7, MAXN = 405;
 int SRC, SINK;
 int flow, costperflow, maxflow, totalcost;
