@@ -1,22 +1,20 @@
 //Generating prime numbers from 1 to n, counting numbers from 1..n coprime to n, finding the sum of the divisors of n
 
 const int MSIZE = 1000000;
-bool isprime[MSIZE];
-vector<int> primes;
+int lpf[MSIZE+10]
+vector<long long> primes;
 
 void sieve(int n){
-	fill(isprime, isprime+MSIZE, true);
-	for(int i = 2; i <= n; i++){
-		if(isprime[i]){
-			for(int j = i*i; j <= n; j+= i){
-				isprime[j] = false;
-			}
-		}
-	}
-
-	for(int i = 2; i <= n; i++){
-		if(isprime[i]){
+	for(int i = 0; i <= n; i++)
+		lpf[i] = 0;
+	
+	for(long long i = 2; i <= n; i++){
+		if(lpf[i] == 0){
+			lpf[i] = i;
 			primes.push_back(i);
+		}
+		for(int j = 0; j < primes.size() && primes[j]*i <= n; j++){
+			lpf[primes[j]*i] = primes[j];
 		}
 	}
 }
