@@ -48,5 +48,5 @@ int main() {
         totalcost += costperflow;
         maxflow += flow;
     }
-    printf("maxflow=%d, totalcost=%d\n";, maxflow, totalcost);
+    printf("maxflow=%d, totalcost=%d\n", maxflow, totalcost);
 }
