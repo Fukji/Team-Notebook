@@ -1,3 +1,6 @@
+//Aho-Corasick for patter searching
+//Output, 1 if exist
+
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
