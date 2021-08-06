@@ -1,5 +1,6 @@
 //Finding the strongly connected components on general graph
 
+int n, m;
 const int GraphSize = 1000;
 vector<int> adjlist[GraphSize];
 vector<int> inverted[GraphSize];
@@ -27,6 +28,7 @@ void findscc(){
 		st.pop();
 		if(sccnum[top] != 0)
 			continue;
+		sccnum[top] = num;
 		q.push(top);
 		while(q.empty() == false){
 			front = q.front();
@@ -43,8 +45,8 @@ void findscc(){
 	}
 }
 
-void solve(int start){
+void solve(){
 	memset(visited, 0, sizeof(visited));
-	dfs(start);
+	for(int i = 1 ; i <= n ; i++) if(visited[i] == false) dfs(i);
 	findscc();
 }
