@@ -1,4 +1,3 @@
-
 struct suffix{
 	int at;
 	int rank[2];
@@ -8,10 +7,10 @@ int Compare(suffix a, suffix b){
 	return (a.rank[0] == b.rank[0])? (a.rank[1] < b.rank[1] ? 1: 0) : (a.rank[0] < b.rank[0] ? 1: 0);
 }
 
-suffix suf[100005];
-int indexOf[100005];
+suffix suf[1000005];
+int indexOf[1000005];
 
-vector<int> buildSuffixArray(string txt, int n){
+void buildSuffixArray(string &txt, int &n, vector<ll> &pos){
 	for(int i = 0 ; i < n ; i++){
 		suf[i].at = i;
 		suf[i].rank[0] = txt[i];
@@ -45,17 +44,13 @@ vector<int> buildSuffixArray(string txt, int n){
 		sort(suf, suf + n, Compare);
 	}
 
-	vector<int> pos;
-	
 	for(int i = 0 ; i < n ; i++)
 		pos.push_back(suf[i].at);
-
-	return pos;
 }
 
-vector<int> kasai(string txt, vector<int> suffixArr){
+void kasai(string &txt, vector<ll> &suffixArr, vector<ll> &lcp){
 	int n = suffixArr.size();
-	vector<int> lcp(n, 0);
+	lcp = vector<ll>(n, 0);
 	vector<int> invSuff(n, 0);
 
 	for (int i=0; i < n; i++)
@@ -77,5 +72,9 @@ vector<int> kasai(string txt, vector<int> suffixArr){
 
 		if (k > 0) k--;
 	}
-	return lcp;
 }
+
+vector<ll> idx;
+vector<ll> lcp;
+int n;
+string s;
