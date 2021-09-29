@@ -26,7 +26,6 @@ public:
 		t = 0;
 	}
 
-	//x = in[x]
 	void upd(int id, int l, int r, int x, int v)
 	{
 		if(l == r)
@@ -44,7 +43,6 @@ public:
 
 	int que(int id, int l, int r, int tl, int tr)
 	{
-		// cout << " ? " << l << " " << r << endl;
 		if(r < tl || l > tr)
 			return 0;
 		if(tl <= l && r <= tr)
