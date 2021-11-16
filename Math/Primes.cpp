@@ -19,23 +19,21 @@ void sieve(int n){
 	}
 }
 
-long long eulerphi(long long n){
-	double ans = n;
-	long long prime, idx = 0;
-	while(primes[idx] * primes[idx] <= n){
-		prime = primes[idx];
-		if(n % prime == 0){
-			while(n % prime == 0){
-				n /= prime;
-			}
-			ans *= (1.0 - (1.0/double(prime)));
-		}
-		idx++;
-	}
-	if(n > 1){
-		ans *= (1.0 - (1.0/(double)n));
-	}
-	return (long long)ans;
+int phi(int n) {
+    int result = n;
+    for(int p = 2; p * p <= n; ++p) {
+         
+        // Check if p is a prime factor.
+        if (n % p == 0) {
+            while (n % p == 0)
+                n /= p;
+                 
+            result -= result / p;
+        }
+    }
+    if (n > 1)
+        result -= result / n;
+    return result;
 }
 
 long long sumdiv(long long n){
