@@ -1,28 +1,21 @@
 //Generating prime numbers from 1 to n, counting numbers from 1..n coprime to n, finding the sum of the divisors of n
 
-const int MSIZE = 1000000;
-int lpf[MSIZE+10]
-vector<long long> primes;
+const long long MAXN = 10000005;
+long long SPF[MAXN+10], M[MAXN + 10];
+bool B[MAXN];
+vector<long long> prima;
 
-void sieve(int n){
-	for(int i = 0; i <= n; i++)
-		lpf[i] = 0;
-	
-	for(long long i = 2; i <= n; i++){
-		if(lpf[i] == 0){
-			lpf[i] = i;
-			primes.push_back(i);
-		}
-		for(int j = 0; j < primes.size() && primes[j]*i <= n; j++){
-			lpf[primes[j]*i] = primes[j];
-		}
-	}
-}
-
-void generate_mobius() {
-for (ll i=1;i<MAXN;i++) {
-	if (i==1) M[i]=1; else if (lpf[i]==i) M[i]=-1;
-	else if ((i/lpf[i])%lpf[i]==0) M[i]=0; else M[i]=M[i/lpf[i]]*M[lpf[i]];}
+void sieveAndMobius() {
+	prima.clear(); memset(B,true,sizeof(B)); B[0]=B[1]=false; 
+	for (long long i=2;i<MAXN;i++) { 
+	    if (B[i]) prima.push_back(i), SPF[i]=i; 
+	    for (long long j=0;j<prima.size() && i*prima[j]<MAXN && prima[j]<=SPF[i];j++) 
+		B[i*prima[j]]=false, SPF[i*prima[j]]=prima[j];
+	} 
+	for (long long i=1;i<MAXN;i++) { 
+	    if (i==1) M[i]=1; else if (SPF[i]==i) M[i]=-1; 
+	    else if ((i/SPF[i])%SPF[i]==0) M[i]=0; else M[i]=M[i/SPF[i]]*M[SPF[i]];
+	} 
 }
 
 int phi(int n) {
