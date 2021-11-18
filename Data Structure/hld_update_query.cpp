@@ -92,8 +92,7 @@ public:
 };
 int n, a[100005], q;
 HLD hld;
-void input()
-{
+void input(){
 	hld.reset();
 	cin >> n >> q;
 	hld = HLD(n);
